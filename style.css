@@ -1,0 +1,393 @@
+:root {
+    --bg-color: #07090e;
+    --card-bg: rgba(15, 23, 42, 0.75);
+    --text-main: #ffffff;
+    --text-sub: #94a3b8;
+    --primary-glow: #38bdf8;
+    --accent-glow: #818cf8;
+    --border-color: rgba(255, 255, 255, 0.12);
+    --btn-bg: rgba(255, 255, 255, 0.05);
+}
+
+body.light-theme {
+    --bg-color: #f1f5f9;
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --text-main: #0f172a;
+    --text-sub: #475569;
+    --primary-glow: #0284c7;
+    --accent-glow: #6366f1;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --btn-bg: rgba(0, 0, 0, 0.05);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden;
+    transition: background-color 0.4s ease;
+}
+
+.ambient-blob {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    z-index: -2;
+    transition: background 0.6s ease;
+}
+
+.blob-1 { top: 15%; left: 20%; background: var(--primary-glow); }
+.blob-2 { bottom: 15%; right: 20%; background: var(--accent-glow); }
+
+#particle-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+}
+
+.cinematic-fade {
+    animation: cinematicOpening 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes cinematicOpening {
+    0% { opacity: 0; transform: translateY(30px) scale(0.95); filter: blur(10px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+.card-container {
+    background: var(--card-bg);
+    backdrop-filter: blur(25px);
+    padding: 25px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 340px;
+    
+    /* Double Border Effect */
+    border: 1px solid var(--primary-glow);
+    outline: 2px solid rgba(56, 189, 248, 0.2);
+    outline-offset: 4px;
+    
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+    transition: all 0.3s ease;
+}
+
+.card-container:hover {
+    outline-color: var(--primary-glow);
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.3);
+}
+
+.header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.greeting-badge {
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--primary-glow);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    border: 1px solid var(--border-color);
+    transition: color 0.4s ease;
+}
+
+.theme-toggle {
+    background: var(--btn-bg);
+    border: 1px solid var(--border-color);
+    color: var(--primary-glow);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, color 0.4s ease;
+}
+
+.theme-toggle:hover { transform: scale(1.1); }
+
+.profile-section { text-align: center; margin-bottom: 15px; }
+
+/* Color Hint Badge */
+.color-hint-badge {
+    display: inline-block;
+    font-size: 10.5px;
+    color: var(--primary-glow);
+    background: var(--btn-bg);
+    border: 1px solid var(--border-color);
+    padding: 3px 10px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 6px 0;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.color-hint-badge:hover {
+    transform: translateY(-1px);
+    border-color: var(--primary-glow);
+}
+
+/* Image Profile Styling */
+/* ⚡ Super Cool Sci-Fi Cyber Rings Avatar */
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    margin: 0 auto 4px auto;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Outer Ring - Clockwise Spin */
+.avatar::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px dashed var(--primary-glow);
+    animation: spinOuter 6s linear infinite;
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+/* Inner Ring - Counter-Clockwise Spin */
+.avatar::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    border-top-color: var(--accent-glow);
+    border-bottom-color: #ec4899;
+    animation: spinInner 2.5s linear infinite reverse;
+}
+
+@keyframes spinOuter {
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes spinInner {
+    100% { transform: rotate(360deg); }
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid var(--bg-color); /* Extra border para malinis ang cutout */
+    z-index: 1;
+}
+
+/* Hover & Active Effects */
+.avatar:hover {
+    transform: scale(1.1);
+}
+
+.avatar:hover::before {
+    animation-duration: 2s; /* Mas mabilis umiikot pag inihover */
+    box-shadow: 0 0 25px var(--primary-glow);
+}
+
+.avatar:active {
+    transform: scale(0.95);
+}
+
+h1 { font-size: 22px; margin: 4px 0 0 0; font-weight: 700; color: var(--text-main); }
+.bio { color: var(--text-sub); font-size: 12.5px; margin-top: 4px; min-height: 18px; }
+.cursor { color: var(--primary-glow); animation: blink 0.8s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+.tabs-nav {
+    display: flex;
+    gap: 5px;
+    background: var(--btn-bg);
+    padding: 4px;
+    border-radius: 14px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--text-sub);
+    padding: 8px 0;
+    font-size: 11.5px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    background: var(--primary-glow);
+    color: #ffffff;
+}
+
+.tab-content { display: none; }
+.tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.links-grid { display: flex; flex-direction: column; gap: 8px; }
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 12.5px;
+    font-weight: 600;
+}
+
+.fb { background: #1877f2; }
+.ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.tt { background: #000000; }
+
+.about-card {
+    background: var(--btn-bg);
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-sub);
+    border: 1px solid var(--border-color);
+}
+
+.tech-chips { display: flex; gap: 6px; margin-top: 10px; }
+.tech-chips span {
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--primary-glow);
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    transition: color 0.4s ease;
+}
+
+/* Music Tab Styling */
+.music-card {
+    background: var(--btn-bg);
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.music-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.disc-icon {
+    font-size: 32px;
+    color: var(--primary-glow);
+    transition: transform 0.4s ease, color 0.4s ease;
+}
+
+.disc-icon.spinning {
+    animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.track-details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.track-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.track-artist {
+    font-size: 11px;
+    color: var(--text-sub);
+}
+
+/* Sound Visualizer Bars */
+.visualizer {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 18px;
+}
+
+.visualizer span {
+    width: 3px;
+    height: 4px;
+    background: var(--primary-glow);
+    border-radius: 2px;
+    transition: height 0.2s ease, background 0.4s ease;
+}
+
+.visualizer.playing span {
+    animation: bounce 0.6s ease infinite alternate;
+}
+
+.visualizer.playing span:nth-child(2) { animation-delay: 0.1s; }
+.visualizer.playing span:nth-child(3) { animation-delay: 0.2s; }
+.visualizer.playing span:nth-child(4) { animation-delay: 0.3s; }
+.visualizer.playing span:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+    0% { height: 4px; }
+    100% { height: 18px; }
+}
+
+.music-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary-glow), var(--accent-glow));
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.music-btn:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}

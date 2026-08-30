@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joshua Bunye | Digital Card</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+</head>
+<body class="dark-theme">
+
+    <!-- Ambient Background Blobs -->
+    <div class="ambient-blob blob-1"></div>
+    <div class="ambient-blob blob-2"></div>
+
+    <!-- Particle Background -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Main Card Container -->
+    <div class="card-container cinematic-fade" data-tilt data-tilt-max="6" data-tilt-speed="400">
+        
+        <!-- Header Controls: Greeting & Theme Switch -->
+        <div class="header-controls">
+            <div class="greeting-badge" id="greeting">Loading...</div>
+            <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()" title="Switch Theme">
+                <i class="fa-solid fa-sun" id="theme-icon"></i>
+            </button>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <div class="avatar" id="avatar" onclick="changeAccentColor()" title="Click to change color!">
+                <img src="prof.jpg" alt="Profile Picture">
+            </div>
+            
+            <!-- Dynamic Color Picker Text Hint -->
+            <div class="color-hint-badge" onclick="changeAccentColor()">
+                🎨 Tap avatar to change color
+            </div>
+
+            <h1>P R I M O</h1>
+            <p class="bio"><span id="typewriter"></span><span class="cursor">|</span></p>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab('socials')"><i class="fa-solid fa-share-nodes"></i> Socials</button>
+            <button class="tab-btn" onclick="switchTab('about')"><i class="fa-solid fa-user"></i> About</button>
+            <button class="tab-btn" onclick="switchTab('music')"><i class="fa-solid fa-music"></i> Music</button>
+        </div>
+
+        <!-- Tab 1: Socials -->
+        <div class="tab-content active" id="tab-socials">
+            <div class="links-grid">
+                <a href="https://www.facebook.com/joshuabunye12/" target="_blank" class="social-btn fb" onclick="playClickSound()">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                </a>
+                <a href="https://www.instagram.com/joshua_jbunye/" target="_blank" class="social-btn ig" onclick="playClickSound()">
+                    <i class="fa-brands fa-instagram"></i> Instagram
+                </a>
+                <a href="https://www.tiktok.com/@joshuabunye" target="_blank" class="social-btn tt" onclick="playClickSound()">
+                    <i class="fa-brands fa-tiktok"></i> TikTok
+                </a>
+            </div>
+        </div>
+
+        <!-- Tab 2: About Me -->
+        <div class="tab-content" id="tab-about">
+            <div class="about-card">
+                <p>Hi! I'm Josh, im student college i'm not professional but i love my curiosity thanks🙌</p>
+                <div class="tech-chips">
+                    <span><i class="fa-brands fa-html5"></i> Web App Dev</span>
+                    <span><i class="fa-solid fa-code"></i> VS Code</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Music Player -->
+        <div class="tab-content" id="tab-music">
+            <div class="music-card">
+                <div class="music-info">
+                    <div class="disc-icon" id="disc">
+                        <i class="fa-solid fa-compact-disc"></i>
+                    </div>
+                    <div class="track-details">
+                        <span class="track-title">Favorite Vibe</span>
+                        <span class="track-artist">Joshua's Playlist 🎧</span>
+                    </div>
+                </div>
+
+                <!-- Animated Sound Wave Visualizer -->
+                <div class="visualizer" id="visualizer">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+
+                <!-- Player Controls -->
+                <button class="music-btn" id="play-btn" onclick="toggleMusic()">
+                    <i class="fa-solid fa-play" id="play-icon"></i> <span id="music-text">Play Track</span>
+                </button>
+
+                <!-- Audio Element -->
+                <audio id="bg-music" loop>
+                    <source src="mysong.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
